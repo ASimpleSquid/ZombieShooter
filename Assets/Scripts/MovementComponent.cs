@@ -67,7 +67,7 @@ public class MovementComponent : MonoBehaviour
     }
     public void OnJump(InputValue value)
     {
-        if (playerController.isJumping) return;
+        //if (playerController.isJumping) return;
 
         playerController.isJumping = true;
         rigidbody.AddForce((transform.up + moveDirection) * jumpForce, ForceMode.Impulse);
@@ -79,5 +79,6 @@ public class MovementComponent : MonoBehaviour
         if (!collision.gameObject.CompareTag("Ground") && !playerController.isJumping) return;
 
         playerController.isJumping = false;
+        playerAnimator.SetBool(isJumpingHash, false);
     }
 }
