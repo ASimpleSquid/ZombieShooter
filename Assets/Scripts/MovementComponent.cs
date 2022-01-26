@@ -54,7 +54,7 @@ public class MovementComponent : MonoBehaviour
         // camera y-axis rotation
         followTransform.transform.rotation *= Quaternion.AngleAxis(lookInput.y * aimSensitivity, Vector3.left);
 
-        var angles = followTransform.transform.eulerAngles;
+        var angles = followTransform.transform.localEulerAngles;
         angles.z = 0;
 
         var angle = followTransform.transform.localEulerAngles.x;
@@ -69,6 +69,9 @@ public class MovementComponent : MonoBehaviour
         }
 
         followTransform.transform.localEulerAngles = angles;
+
+        transform.rotation = Quaternion.Euler(0, followTransform.transform.rotation.eulerAngles.y, 0);
+        followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
 
         //if (playerController.isJumping) return;
         if (!(inputVector.magnitude > 0)) moveDirection = Vector3.zero;
