@@ -1,4 +1,4 @@
-//Used during Week 2
+//Used during Week 2/3
 
 using System.Collections;
 using System.Collections.Generic;
@@ -19,11 +19,14 @@ public class MovementComponent : MonoBehaviour
     PlayerController playerController;
     Rigidbody rigidbody;
     Animator playerAnimator;
+    public GameObject followTransform;
 
     //Movement Refrences
     Vector2 inputVector = Vector2.zero;
     Vector2 lookInput = Vector2.zero;
     Vector3 moveDirection = Vector3.zero;
+
+    public float aimSensitivity;
 
     public readonly int movementXHash = Animator.StringToHash("MovementX");
     public readonly int movementYHash = Animator.StringToHash("MovementY");
@@ -46,6 +49,27 @@ public class MovementComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // camera x-axis rotation
+        followTransform.transform.rotation *= Quaternion.AngleAxis(lookInput.x * aimSensitivity, Vector3.up);
+        // camera y-axis rotation
+        followTransform.transform.rotation *= Quaternion.AngleAxis(lookInput.y * aimSensitivity, Vector3.left);
+
+        var angles = followTransform.transform.eulerAngles;
+        angles.z = 0;
+
+        var angle = followTransform.transform.localEulerAngles.x;
+
+        if(angle > 180 && angle < 300)
+        {
+            angles.x = 300;
+        }
+        else if(angle < 180 && angle > 70)
+        {
+            angles.x = 70;
+        }
+
+        followTransform.transform.localEulerAngles = angles;
+
         //if (playerController.isJumping) return;
         if (!(inputVector.magnitude > 0)) moveDirection = Vector3.zero;
 
