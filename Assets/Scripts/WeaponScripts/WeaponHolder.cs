@@ -20,6 +20,8 @@ public class WeaponHolder : MonoBehaviour
     [SerializeField]
     Transform gripIKSocketLocation;
 
+    bool firingPressed = false;
+
     public readonly int isFiringHash = Animator.StringToHash("IsFiring");
     public readonly int isReloadingHash = Animator.StringToHash("IsReloading");
 
@@ -53,12 +55,35 @@ public class WeaponHolder : MonoBehaviour
     {
         playerController.isReloading = value.isPressed;
         playerAnimator.SetBool(isReloadingHash, playerController.isReloading);
+        playerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
     }
 
     public void OnFire(InputValue value)
     {
         playerController.isFiring = value.isPressed;
-        playerAnimator.SetBool(isFiringHash, playerController.isFiring);
-        // set up firing animation
+        if (firingPressed)
+        {
+            StartFiring();
+        }
+        else
+        {
+            StopFiring();
+        }
+    }
+
+    void StartFiring()
+    {
+        if (equippedWeapon.weaponStats.bulletsInClip <= 0) return;
+
+        playerAnimator.SetBool(isFiringHash, true);
+        playerController.isFiring = true;
+        equippedWeapon.StartFiringWeapon();
+    }
+
+    void StopFiring()
+    {
+        playerAnimator.SetBool(isFiringHash, false);
+        playerController.isFiring = false;
+        equippedWeapon.StopFiringWeapon();
     }
 }
