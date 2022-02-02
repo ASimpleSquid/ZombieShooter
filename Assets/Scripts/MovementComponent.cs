@@ -1,4 +1,4 @@
-//Used during Week 2/3
+//Used during Week 2/3/4
 
 using System.Collections;
 using System.Collections.Generic;
@@ -115,19 +115,6 @@ public class MovementComponent : MonoBehaviour
     {
         lookInput = value.Get<Vector2>();
         //if we aim up, down, adjust animations to have a mask that will let us properly animate aim
-    }
-
-    public void OnReload(InputValue value)
-    {
-        playerController.isReloading = value.isPressed;
-        playerAnimator.SetBool(isReloadingHash, playerController.isReloading);
-    }
-
-    public void OnFire(InputValue value)
-    {
-        playerController.isFiring = value.isPressed;
-        playerAnimator.SetBool(isFiringHash, playerController.isFiring);
-        // set up firing animation
     }
 
     private void OnCollisionEnter(Collision collision)
