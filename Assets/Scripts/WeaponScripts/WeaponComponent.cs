@@ -34,19 +34,31 @@ public class WeaponComponent : MonoBehaviour
 {
     public Transform gripLocation;
     public WeaponStats weaponStats;
+    protected WeaponHolder weaponHolder;
+    public bool isFiring;
+    public bool isReloading;
 
-    bool isFiring;
-    bool isReloading;
+    protected Camera mainCamera;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+    }
+
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void Initialized(WeaponHolder _weaponHolder)
+    {
+        weaponHolder = _weaponHolder;
     }
 
     public virtual void StartFiringWeapon()
@@ -69,9 +81,14 @@ public class WeaponComponent : MonoBehaviour
         CancelInvoke(nameof(FireWeapon));
     }
 
-    public virtual void FireWeapon()
+    protected virtual void FireWeapon()
     {
         print("Firing Main Cannon!");
         weaponStats.bulletsInClip--;
+        if(weaponStats.bulletsInClip <= 0)
+        {
+            StopFiringWeapon();
+        }
+        print(weaponStats.bulletsInClip);
     }
 }

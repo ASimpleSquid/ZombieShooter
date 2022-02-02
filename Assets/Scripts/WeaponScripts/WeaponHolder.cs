@@ -10,7 +10,7 @@ public class WeaponHolder : MonoBehaviour
     [Header("WeaponToSpawn"), SerializeField]
     GameObject weaponToSpawn;
 
-    PlayerController playerController;
+    public PlayerController playerController;
     Animator playerAnimator;
     public Sprite crossHairImage;
     WeaponComponent equippedWeapon;
@@ -33,6 +33,7 @@ public class WeaponHolder : MonoBehaviour
         GameObject spawnedWeapon = Instantiate(weaponToSpawn, weaponSocketLocation.transform.position, weaponSocketLocation.transform.rotation, weaponSocketLocation.transform);
 
         equippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
+        equippedWeapon.Initialized(this);
         gripIKSocketLocation = equippedWeapon.gripLocation;
     }
 
@@ -60,7 +61,7 @@ public class WeaponHolder : MonoBehaviour
 
     public void OnFire(InputValue value)
     {
-        playerController.isFiring = value.isPressed;
+        firingPressed = value.isPressed;
         if (firingPressed)
         {
             StartFiring();
