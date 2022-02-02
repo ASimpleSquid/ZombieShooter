@@ -13,6 +13,7 @@ public class WeaponHolder : MonoBehaviour
     PlayerController playerController;
     Animator playerAnimator;
     public Sprite crossHairImage;
+    WeaponComponent equippedWeapon;
 
     [SerializeField]
     GameObject weaponSocketLocation;
@@ -28,12 +29,21 @@ public class WeaponHolder : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         playerAnimator = GetComponent<Animator>();
         GameObject spawnedWeapon = Instantiate(weaponToSpawn, weaponSocketLocation.transform.position, weaponSocketLocation.transform.rotation, weaponSocketLocation.transform);
+
+        equippedWeapon = spawnedWeapon.GetComponent<WeaponComponent>();
+        gripIKSocketLocation = equippedWeapon.gripLocation;
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    private void OnAnimatorIK(int layerIndex)
+    {
+        playerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+        playerAnimator.SetIKPosition(AvatarIKGoal.LeftHand, gripIKSocketLocation.transform.position);
     }
 
     public void OnReload(InputValue value)
