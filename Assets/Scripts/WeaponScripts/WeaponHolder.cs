@@ -42,8 +42,11 @@ public class WeaponHolder : MonoBehaviour
 
     private void OnAnimatorIK(int layerIndex)
     {
-        playerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
-        playerAnimator.SetIKPosition(AvatarIKGoal.LeftHand, gripIKSocketLocation.transform.position);
+        if(!playerController.isReloading)
+        {
+            playerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+            playerAnimator.SetIKPosition(AvatarIKGoal.LeftHand, gripIKSocketLocation.transform.position);
+        }
     }
 
     public void OnReload(InputValue value)
