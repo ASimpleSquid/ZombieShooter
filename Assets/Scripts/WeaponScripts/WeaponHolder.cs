@@ -52,13 +52,6 @@ public class WeaponHolder : MonoBehaviour
         }
     }
 
-    public void OnReload(InputValue value)
-    {
-        playerController.isReloading = value.isPressed;
-        playerAnimator.SetBool(isReloadingHash, playerController.isReloading);
-        playerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
-    }
-
     public void OnFire(InputValue value)
     {
         firingPressed = value.isPressed;
@@ -86,5 +79,16 @@ public class WeaponHolder : MonoBehaviour
         playerAnimator.SetBool(isFiringHash, false);
         playerController.isFiring = false;
         equippedWeapon.StopFiringWeapon();
+    }
+    public void OnReload(InputValue value)
+    {
+        playerController.isReloading = value.isPressed;
+        playerAnimator.SetBool(isReloadingHash, playerController.isReloading);
+        playerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
+    }
+
+    public void StartReloading()
+    {
+
     }
 }
