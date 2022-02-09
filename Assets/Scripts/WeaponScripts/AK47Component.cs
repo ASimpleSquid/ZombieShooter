@@ -25,7 +25,7 @@ public class AK47Component : WeaponComponent
         else if(weaponStats.bulletsInClip <= 0)
         {
             //trigger a reload when empty
-            weaponHolder.startReloading();
+            //weaponHolder.startReloading();
         }
     }
 }
