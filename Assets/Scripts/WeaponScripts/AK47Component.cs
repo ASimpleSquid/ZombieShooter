@@ -1,4 +1,4 @@
-//used in week 4
+//used in week 4/5
 
 using System.Collections;
 using System.Collections.Generic;
@@ -25,7 +25,8 @@ public class AK47Component : WeaponComponent
         else if(weaponStats.bulletsInClip <= 0)
         {
             //trigger a reload when empty
-            //weaponHolder.startReloading();
+            weaponHolder.StartReloading();
+            print("You are RELOAAAADING!!!!!!");
         }
     }
 }

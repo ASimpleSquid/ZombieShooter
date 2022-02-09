@@ -1,4 +1,4 @@
-//used in week 4
+//used in week 4/5
 
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +28,8 @@ public struct WeaponStats
     public float fireDistance;
     public bool repeating;
     public LayerMask weaponHitLayers;
-} 
+    public int totalBullets;
+}
 
 public class WeaponComponent : MonoBehaviour
 {
@@ -42,7 +43,7 @@ public class WeaponComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     private void Awake()
@@ -53,7 +54,7 @@ public class WeaponComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Initialized(WeaponHolder _weaponHolder)
@@ -64,7 +65,7 @@ public class WeaponComponent : MonoBehaviour
     public virtual void StartFiringWeapon()
     {
         isFiring = true;
-        if(weaponStats.repeating)
+        if (weaponStats.repeating)
         {
             //fire weapon
             InvokeRepeating(nameof(FireWeapon), weaponStats.fireStartDelay, weaponStats.fireRate);
@@ -85,10 +86,32 @@ public class WeaponComponent : MonoBehaviour
     {
         print("Firing Main Cannon!");
         weaponStats.bulletsInClip--;
-        if(weaponStats.bulletsInClip <= 0)
-        {
-            StopFiringWeapon();
-        }
         print(weaponStats.bulletsInClip);
+    }
+
+    public virtual void StartReloading()
+    {
+        isReloading = true;
+        ReloadWeapon();
+    }
+    public virtual void StopReloading()
+    {
+        isReloading = false;
+    }
+    protected virtual void ReloadWeapon()
+    {
+        //check to see if there is a firing effect and stop it
+
+        int bulletsToReload = weaponStats.clipSize - weaponStats.totalBullets;
+        if(bulletsToReload < 0)
+        {
+            weaponStats.bulletsInClip = weaponStats.clipSize;
+            weaponStats.totalBullets -= weaponStats.clipSize;
+        }
+        else
+        {
+            weaponStats.bulletsInClip = weaponStats.totalBullets;
+            weaponStats.totalBullets = 0;
+        }
     }
 }
