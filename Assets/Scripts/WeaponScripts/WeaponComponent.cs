@@ -71,6 +71,7 @@ public class WeaponComponent : MonoBehaviour
         if (weaponStats.repeating)
         {
             //fire weapon
+            CancelInvoke(nameof(FireWeapon));
             InvokeRepeating(nameof(FireWeapon), weaponStats.fireStartDelay, weaponStats.fireRate);
         }
         else
