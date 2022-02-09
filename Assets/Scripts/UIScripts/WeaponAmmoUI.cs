@@ -1,4 +1,4 @@
-//used in week 5
+//used in week 5.
 
 using System.Collections;
 using System.Collections.Generic;
