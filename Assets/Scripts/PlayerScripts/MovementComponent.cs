@@ -99,7 +99,10 @@ public class MovementComponent : MonoBehaviour
     }
     public void OnJump(InputValue value)
     {
-        //if (playerController.isJumping) return;
+        if (playerController.isJumping)
+        {
+            return;
+        }
 
         playerController.isJumping = true;
         rigidbody.AddForce((transform.up + moveDirection) * jumpForce, ForceMode.Impulse);
