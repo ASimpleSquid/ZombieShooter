@@ -2,17 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieDeadState : MonoBehaviour
+public class ZombieDeadState : ZombieStates
 {
-    // Start is called before the first frame update
-    void Start()
+    int movementZhash = Animator.StringToHash("MovementZ");
+    int isDeadHash = Animator.StringToHash("IsDead");
+    public ZombieDeadState(ZombieComponent zombie, ZombieStateMachine stateMachine) : base(zombie, stateMachine)
     {
-        
+        updateInterval = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    // Start is called before the first frame update
+    public override void Start()
     {
-        
+        base.Start();
+        ownerZombie.zombieNavMeshAgent.isStopped = true;
+        ownerZombie.zombieNavMeshAgent.ResetPath();
+
+        ownerZombie.zombieAnimator.SetFloat(movementZhash, 0);
+        ownerZombie.zombieAnimator.SetBool(isDeadHash, true);
+    }
+    public override void Exit()
+    {
+        base.Exit();
+        ownerZombie.zombieNavMeshAgent.isStopped = false;
+        ownerZombie.zombieAnimator.SetBool(isDeadHash, false);
     }
 }
