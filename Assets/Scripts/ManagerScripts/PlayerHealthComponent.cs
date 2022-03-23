@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerHealthComponent : HealthComponent
 {
     // Start is called before the first frame update
-    protected override void start()
+    protected override void Start()
     {
-        base.start();
+        base.Start();
         PlayerEvents.InvokeOnHealthInitialized(this);
     }
 }

@@ -11,7 +11,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
     [SerializeField]
     private float maxHealth;
     public float MaxHealth => maxHealth;
-    protected virtual void start()
+    protected virtual void Start()
     {
         currentHealth = maxHealth;
     }
