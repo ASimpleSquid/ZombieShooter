@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
   name: Item
-  itemCategory: 0
-  itemPrefab: {fileID: 0}
+  itemCategory: 2
+  itemPrefab: {fileID: 3373087446848664449, guid: fac969c648cf18347be1b4a3f9e57237, type: 3}
   stackable: 0
   maxSize: 30
   amountValue: 1

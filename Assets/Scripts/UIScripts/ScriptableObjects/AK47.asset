@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AK47
   m_EditorClassIdentifier: 
   name: Item
-  itemCategory: 0
-  itemPrefab: {fileID: 0}
+  itemCategory: 1
+  itemPrefab: {fileID: 8420657579567609381, guid: caf12e0eab7426343a2945bdcdde6b9e, type: 3}
   stackable: 0
   maxSize: 1
   amountValue: 1
