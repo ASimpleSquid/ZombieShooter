@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum ItemCategory {None, Weapon, Consumable, Equipment, Ammo}
 
-public abstract class ItemScript : ScriptableObject
+public abstract class ItemScriptable : ScriptableObject
 {
     public string name = "Item";
     public ItemCategory itemCategory = ItemCategory.None;
