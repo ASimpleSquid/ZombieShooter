@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemCategory {None, Weapon, Consumable, Equipment, Ammo}
+public enum ItemCategory { None, Weapon, Consumable, Equipment, Ammo}
 
-public abstract class ItemScriptable : ScriptableObject
+public abstract class ItemScript : ScriptableObject
 {
     public string name = "Item";
     public ItemCategory itemCategory = ItemCategory.None;
@@ -16,7 +16,7 @@ public abstract class ItemScriptable : ScriptableObject
     public event AmountChange OnAmountChange;
 
     public delegate void ItemDestroyed();
-    public event ItemDestroyed OnItemDestoryed;
+    public event ItemDestroyed OnItemDestroyed;
 
     public delegate void ItemDropped();
     public event ItemDropped OnItemDropped;
@@ -25,7 +25,7 @@ public abstract class ItemScriptable : ScriptableObject
 
     public PlayerController controller { get; private set; }
 
-    public virtual void Initializer(PlayerController playerController)
+    public virtual void Initialize(PlayerController playerController)
     {
         controller = playerController;
     }
@@ -34,11 +34,11 @@ public abstract class ItemScriptable : ScriptableObject
 
     public virtual void DeleteItem(PlayerController playerController)
     {
-        OnItemDestoryed?.Invoke();
-        //Delete item form inventory system here
+        OnItemDestroyed?.Invoke();
+        //delete item from inventory system here
     }
 
-    public virtual void DropItem(PlayerController playerController)
+    public virtual void DropItem(PlayerController controller)
     {
         OnItemDropped?.Invoke();
     }
@@ -54,5 +54,4 @@ public abstract class ItemScriptable : ScriptableObject
         amountValue = amount;
         OnAmountChange?.Invoke();
     }
-
 }

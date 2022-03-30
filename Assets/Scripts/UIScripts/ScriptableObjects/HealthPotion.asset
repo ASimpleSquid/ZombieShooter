@@ -16,6 +16,6 @@ MonoBehaviour:
   itemCategory: 0
   itemPrefab: {fileID: 0}
   stackable: 0
-  maxSize: 1
+  maxSize: 30
   amountValue: 1
-  effect: 0
+  effect: 150

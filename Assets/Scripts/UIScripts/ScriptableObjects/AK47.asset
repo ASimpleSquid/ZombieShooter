@@ -19,17 +19,17 @@ MonoBehaviour:
   maxSize: 1
   amountValue: 1
   weaponStats:
-    weaponType: 0
-    firingPattern: 0
-    weaponName: 
-    damage: 0
-    bulletsInClip: 0
-    clipSize: 0
+    weaponType: 2
+    firingPattern: 1
+    weaponName: AK-47
+    damage: 35
+    bulletsInClip: 30
+    clipSize: 30
     fireStartDelay: 0
-    fireRate: 0
-    fireDistance: 0
-    repeating: 0
+    fireRate: 0.25
+    fireDistance: 500
+    repeating: 1
     weaponHitLayers:
       serializedVersion: 2
-      m_Bits: 0
-    totalBullets: 0
+      m_Bits: 4294967295
+    totalBullets: 500
